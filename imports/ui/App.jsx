@@ -52,7 +52,7 @@ export const App = () => {
   const pendingTasksTitle = `${
     pendingTasksCount ? ` (${pendingTasksCount})` : ""
   }`;
-
+  const logout = () => Meteor.logout();
   return (
     <div className="app">
       {user ? (
@@ -61,6 +61,9 @@ export const App = () => {
             <div className="app-bar">
               <div className="app-header">
                 <h1>📝️ To Do List {pendingTasksTitle}</h1>
+              </div>
+              <div className="user" onClick={logout}>
+                {user.username} 🚪
               </div>
             </div>
           </header>
