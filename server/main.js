@@ -1,7 +1,8 @@
 import { Meteor } from "meteor/meteor";
 import { TasksCollection } from "/imports/api/TasksCollection";
 
-const insertTask = (text) => TasksCollection.insert({ text });
+const insertTask = (text) =>
+  TasksCollection.insert({ text, createdAt: new Date() });
 
 const tasks = [
   "First Task",
