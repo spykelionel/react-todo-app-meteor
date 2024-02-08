@@ -5,7 +5,9 @@ import Task from "./Task";
 import TaskForm from "./TaskForm";
 
 export const App = () => {
-  const tasks = useTracker(() => TasksCollection.find({}).fetch());
+  const tasks = useTracker(() =>
+    TasksCollection.find({}, { sort: { createdAt: -1 } }).fetch()
+  );
   return (
     <div>
       <h1>Welcome to Meteor!</h1>
