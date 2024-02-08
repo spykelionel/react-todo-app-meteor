@@ -21,25 +21,33 @@ export const App = () => {
   const pendingOnlyFilter = { ...hideCompletedFilter, ...userFilter };
 
   const { tasks, pendingTasksCount, isLoading } = useTracker(() => {
-    const noDataAvailable = { tasks: [], pendingTasksCount: 0 };
+    const noDataAvailable = {
+      tasks: [],
+      pendingTasksCount: 0,
+      isLoading: false,
+    };
     if (!Meteor.user()) {
+      console.log("User is not authenticated.");
       return noDataAvailable;
     }
     const handler = Meteor.subscribe("tasks");
 
     if (!handler.ready()) {
+      console.log("Handler is not ready.");
       return { ...noDataAvailable, isLoading: true };
     }
 
+    console.log("Handler is now ready");
     const tasks = TasksCollection.find(
       hideCompleted ? pendingOnlyFilter : userFilter,
       {
         sort: { createdAt: -1 },
       }
     ).fetch();
+
     const pendingTasksCount = TasksCollection.find(pendingOnlyFilter).count();
 
-    return { tasks, pendingTasksCount };
+    return { tasks, pendingTasksCount, isLoading: false };
   });
 
   const pendingTasksTitle = `${
