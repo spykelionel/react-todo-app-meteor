@@ -1,6 +1,6 @@
 import React from "react";
 
-const Task = ({ task, onCheckBoxClicked }) => {
+const Task = ({ task, onCheckBoxClicked, onDeleteClick }) => {
   return (
     <>
       <li>
@@ -13,6 +13,7 @@ const Task = ({ task, onCheckBoxClicked }) => {
           readOnly
         />
         <label htmlFor="task">{task.text}</label>
+        <button onClick={() => onDeleteClick(task)}>&times;</button>
       </li>
     </>
   );
