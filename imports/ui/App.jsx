@@ -63,7 +63,7 @@ export const App = () => {
                 <h1>📝️ To Do List {pendingTasksTitle}</h1>
               </div>
               <div className="user" onClick={logout}>
-                {user.username} 🚪
+                {user.username || user.profile.name}
               </div>
             </div>
           </header>
